@@ -18,10 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = context.watch<ThemeProvider>().isDarkMode;
+    final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Book a Ride"),
+        centerTitle: true,
         actions: [
           Switch(
             value: isDarkMode,
@@ -29,24 +31,52 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Text(
+              "Plan Your Trip",
+              style: theme.textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+
+            const SizedBox(height: 30),
+
+            Text("Pickup Location", style: theme.textTheme.labelLarge),
+            const SizedBox(height: 8),
             CustomTextField(controller: pickupController),
 
-            CustomTextField(controller: dropController),
-            SizedBox(height: 10),
+            const SizedBox(height: 16),
 
-            ElevatedButton(
+            Text("Drop Location", style: theme.textTheme.labelLarge),
+            const SizedBox(height: 8),
+            CustomTextField(controller: dropController),
+
+            const SizedBox(height: 30),
+
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueAccent,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                textStyle: const TextStyle(fontSize: 16),
+                elevation: 6,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const RideInfoScreen()),
                 );
               },
-              child: const Text("Book Ride"),
+              icon: const Icon(Icons.directions_car),
+              label: const Text("Book Ride"),
             ),
           ],
         ),

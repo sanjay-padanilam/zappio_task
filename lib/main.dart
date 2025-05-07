@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     final isDark = context.watch<ThemeProvider>().isDarkMode;
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Zappio Ride',
       theme: isDark ? ThemeData.dark() : ThemeData.light(),
       home: const SplashScreen(),

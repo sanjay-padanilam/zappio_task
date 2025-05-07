@@ -6,7 +6,6 @@ class RideInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: const Text("Ride Info"),
         backgroundColor: Colors.deepPurple,
